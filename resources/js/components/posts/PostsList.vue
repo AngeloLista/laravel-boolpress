@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "PostsList",
   data() {
@@ -22,7 +23,6 @@ export default {
         .get("http://localhost:8000/api/posts")
         .then((res) => {
           this.posts = res.data;
-          dd(this.posts);
         })
         .catch((err) => {
           console.log(err);
