@@ -1981,7 +1981,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
-  props: ["post"]
+  props: ["post"],
+  computed: {
+    updatedAt: function updatedAt() {
+      var postDate = new Date(this.post.updated_at);
+      var day = postDate.getDate();
+      var month = postDate.getMonth() + 1;
+      var year = postDate.getFullYear();
+      if (day < 10) day = "0" + day;
+      if (month < 10) month = "0" + month;
+      var hours = postDate.getHours();
+      var minutes = postDate.getMinutes();
+      var seconds = postDate.getSeconds();
+      if (hours < 10) hours = "0" + hours;
+      if (minutes < 10) minutes = "0" + minutes;
+      if (seconds < 10) seconds = "0" + seconds;
+      return "".concat(day, "/").concat(month, "/").concat(year, " - ").concat(hours, ":").concat(minutes, ":").concat(seconds);
+    }
+  }
 });
 
 /***/ }),
@@ -2591,7 +2608,7 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-footer text-muted" }, [
-      _vm._v(_vm._s(_vm.post.updated_at)),
+      _vm._v(_vm._s(_vm.updatedAt)),
     ]),
   ])
 }
