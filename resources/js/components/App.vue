@@ -1,21 +1,20 @@
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">Benvenuti</div>
-
-          <div class="card-body">
-            <h1>Sito in costruzione</h1>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div>
+    <header>
+      <Header title="Boolpress" />
+    </header>
+    <main>
+      <div class="container"></div>
+    </main>
   </div>
 </template>
 
 <script>
+import Header from "./Header.vue";
 export default {
   name: "App",
+  components: {
+    Header,
+  },
 };
 </script>

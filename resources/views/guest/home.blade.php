@@ -11,7 +11,7 @@
 
         <!-- Styles -->
         <style>
-            html, body {
+            /* html, body {
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
@@ -60,7 +60,7 @@
 
             .m-b-md {
                 margin-bottom: 30px;
-            }
+            } */
         </style>
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -68,8 +68,8 @@
 
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+        <div>
+            {{-- @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/admin') }}">Home</a>
@@ -81,7 +81,7 @@
                         @endif
                     @endauth
                 </div>
-            @endif
+            @endif --}}
 
             <div id="root">
                 
