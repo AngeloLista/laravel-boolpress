@@ -1,17 +1,21 @@
 <template>
   <section id="posts-list" class="my-3">
     <h2>Posts</h2>
-    <ul v-if="posts.length">
-      <li v-for="post in posts" :key="post.id">{{ post.title }}</li>
-    </ul>
+    <div v-if="posts.length">
+      <PostCard :post="post" v-for="post in posts" :key="post.id" />
+    </div>
     <p v-else>Non ci sono post.</p>
   </section>
 </template>
 
 <script>
 import axios from "axios";
+import PostCard from "./PostCard.vue";
 export default {
   name: "PostsList",
+  components: {
+    PostCard,
+  },
   data() {
     return {
       posts: [],
