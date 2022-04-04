@@ -1,13 +1,37 @@
 <template>
   <div class="card my-3">
-    <div class="card-header"></div>
+    <div class="card-header d-flex justify-content-between">
+      <span>{{ updatedAt }}</span>
+      <em>{{ post.author.name }}</em>
+    </div>
     <div class="card-body">
       <h5 class="card-title">{{ post.title }}</h5>
       <p class="card-text">
         {{ post.content }}
       </p>
     </div>
-    <div class="card-footer text-muted">{{ updatedAt }}</div>
+    <div
+      class="
+        card-footer
+        text-muted
+        d-flex
+        justify-content-between
+        align-items-center
+      "
+    >
+      <span :class="`badge badge-pill badge-${post.category.color}`">{{
+        post.category.label
+      }}</span>
+      <div>
+        <span
+          v-for="tag in post.tags"
+          :key="tag.id"
+          class="badge mr-1"
+          :style="`background-color: ${tag.color}; color: white;`"
+          >{{ tag.label }}</span
+        >
+      </div>
+    </div>
   </div>
 </template>
 

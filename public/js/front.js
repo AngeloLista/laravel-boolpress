@@ -1979,6 +1979,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post"],
@@ -2597,7 +2621,11 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card my-3" }, [
-    _c("div", { staticClass: "card-header" }),
+    _c("div", { staticClass: "card-header d-flex justify-content-between" }, [
+      _c("span", [_vm._v(_vm._s(_vm.updatedAt))]),
+      _vm._v(" "),
+      _c("em", [_vm._v(_vm._s(_vm.post.author.name))]),
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.post.title))]),
@@ -2607,9 +2635,36 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "card-footer text-muted" }, [
-      _vm._v(_vm._s(_vm.updatedAt)),
-    ]),
+    _c(
+      "div",
+      {
+        staticClass:
+          "\n      card-footer\n      text-muted\n      d-flex\n      justify-content-between\n      align-items-center\n    ",
+      },
+      [
+        _c(
+          "span",
+          { class: "badge badge-pill badge-" + _vm.post.category.color },
+          [_vm._v(_vm._s(_vm.post.category.label))]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          _vm._l(_vm.post.tags, function (tag) {
+            return _c(
+              "span",
+              {
+                key: tag.id,
+                staticClass: "badge mr-1",
+                style: "background-color: " + tag.color + "; color: white;",
+              },
+              [_vm._v(_vm._s(tag.label))]
+            )
+          }),
+          0
+        ),
+      ]
+    ),
   ])
 }
 var staticRenderFns = []
