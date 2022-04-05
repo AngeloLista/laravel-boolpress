@@ -24,7 +24,7 @@ export default {
     getPost() {
       this.isLoading = true;
       axios
-        .get("http://localhost:8000/api/posts/93")
+        .get("http://localhost:8000/api/posts/" + this.$route.params.id)
         .then((res) => {
           this.post = res.data;
         })
