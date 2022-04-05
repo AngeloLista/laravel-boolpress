@@ -5,7 +5,7 @@
     </header>
     <main>
       <div class="container">
-        <PostsList />
+        <router-view></router-view>
       </div>
     </main>
   </div>
