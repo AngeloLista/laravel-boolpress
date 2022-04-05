@@ -8,7 +8,7 @@
       </div>
       <div>
         <router-link
-          class="btn btn-primary"
+          class="btn btn-sm btn-primary"
           :to="{ name: 'post-details', params: { id: post.id } }"
           >Show more</router-link
         >
