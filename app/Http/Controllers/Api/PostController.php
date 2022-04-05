@@ -39,7 +39,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::with(['author', 'category', 'tags'])->find($id);
+        if (!$post) return response('', 404);
+
+        return response()->json($post);
     }
 
     /**
