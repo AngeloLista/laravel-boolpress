@@ -1,5 +1,6 @@
 <template>
-  <section id="post-details">
+  <section id="post-details" class="my-3">
+    <h1>Post Details</h1>
     <Loader v-if="isLoading && !post" />
     <PostCard hide-link="true" v-else :post="post" />
   </section>

@@ -5,7 +5,7 @@
   >
     <h3 class="h1">404 | Not Found</h3>
     <button class="btn btn-primary mt-3" @click="$router.back()">
-      Go back
+      Go Back
     </button>
   </section>
 </template>

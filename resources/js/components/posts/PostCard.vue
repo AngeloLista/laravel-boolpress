@@ -15,7 +15,7 @@
           >Show more</router-link
         >
         <button v-else class="btn btn-sm btn-primary" @click="$router.back()">
-          Go back
+          Go Back
         </button>
       </div>
     </div>

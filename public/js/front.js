@@ -1968,8 +1968,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Header",
   props: ["title"]
@@ -2064,6 +2062,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
 /* harmony import */ var _posts_PostCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../posts/PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
+//
 //
 //
 //
@@ -3548,12 +3547,7 @@ var render = function () {
                 _c(
                   "router-link",
                   { staticClass: "nav-link", attrs: { to: "/" } },
-                  [
-                    _vm._v("Home "),
-                    _c("span", { staticClass: "sr-only" }, [
-                      _vm._v("(current)"),
-                    ]),
-                  ]
+                  [_vm._v("Home")]
                 ),
               ],
               1
@@ -3692,7 +3686,7 @@ var render = function () {
             },
           },
         },
-        [_vm._v("\n    Go back\n  ")]
+        [_vm._v("\n    Go Back\n  ")]
       ),
     ]
   )
@@ -3721,8 +3715,10 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "section",
-    { attrs: { id: "post-details" } },
+    { staticClass: "my-3", attrs: { id: "post-details" } },
     [
+      _c("h1", [_vm._v("Post Details")]),
+      _vm._v(" "),
       _vm.isLoading && !_vm.post
         ? _c("Loader")
         : _c("PostCard", { attrs: { "hide-link": "true", post: _vm.post } }),
@@ -3884,7 +3880,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("\n        Go back\n      ")]
+                [_vm._v("\n        Go Back\n      ")]
               ),
         ],
         1
