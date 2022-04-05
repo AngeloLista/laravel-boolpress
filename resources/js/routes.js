@@ -12,8 +12,9 @@ import NotFoundPage from './components/pages/NotFoundPage.vue'
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        { path: '/', component: HomePage },
-        { path: '*', component: NotFoundPage },
+        { path: '/', component: HomePage, name: 'home' },
+        { path: 'posts/{id}', component: PostDetailsPage, name: 'Post-details' },
+        { path: '*', component: NotFoundPage, name: 'not-found' },
     ]
 })
 
