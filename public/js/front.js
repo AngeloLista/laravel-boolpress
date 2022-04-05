@@ -2214,9 +2214,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
-  props: ["post"],
+  props: ["post", "hide-link"],
   computed: {
     updatedAt: function updatedAt() {
       var postDate = new Date(this.post.updated_at);
@@ -3720,7 +3722,7 @@ var render = function () {
     [
       _vm.isLoading && !_vm.post
         ? _c("Loader")
-        : _c("PostCard", { attrs: { post: _vm.post } }),
+        : _c("PostCard", { attrs: { "hide-link": "true", post: _vm.post } }),
     ],
     1
   )
@@ -3855,16 +3857,18 @@ var render = function () {
       _c(
         "div",
         [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-sm btn-primary",
-              attrs: {
-                to: { name: "post-details", params: { id: _vm.post.id } },
-              },
-            },
-            [_vm._v("Show more")]
-          ),
+          !_vm.hideLink
+            ? _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-sm btn-primary",
+                  attrs: {
+                    to: { name: "post-details", params: { id: _vm.post.id } },
+                  },
+                },
+                [_vm._v("Show more")]
+              )
+            : _vm._e(),
         ],
         1
       ),

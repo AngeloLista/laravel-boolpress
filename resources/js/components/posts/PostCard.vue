@@ -7,7 +7,9 @@
         <em class="ml-3">{{ post.author.name }}</em>
       </div>
       <div>
+        <!-- Show More Link -->
         <router-link
+          v-if="!hideLink"
           class="btn btn-sm btn-primary"
           :to="{ name: 'post-details', params: { id: post.id } }"
           >Show more</router-link
@@ -50,7 +52,7 @@
 <script>
 export default {
   name: "PostCard",
-  props: ["post"],
+  props: ["post", "hide-link"],
   computed: {
     updatedAt() {
       const postDate = new Date(this.post.updated_at);

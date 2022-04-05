@@ -1,7 +1,7 @@
 <template>
   <section id="post-details">
     <Loader v-if="isLoading && !post" />
-    <PostCard v-else :post="post" />
+    <PostCard hide-link="true" v-else :post="post" />
   </section>
 </template>
 
