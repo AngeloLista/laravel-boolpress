@@ -1,15 +1,27 @@
 <template>
   <div class="card my-3">
+    <!-- Header -->
     <div class="card-header d-flex justify-content-between">
-      <span>{{ updatedAt }}</span>
-      <em>{{ post.author.name }}</em>
+      <div>
+        <span>{{ updatedAt }}</span>
+        <em class="ml-3">{{ post.author.name }}</em>
+      </div>
+      <div>
+        <router-link
+          class="btn btn-primary"
+          :to="{ name: 'post-details', params: { id: post.id } }"
+          >Show more</router-link
+        >
+      </div>
     </div>
+    <!-- Body -->
     <div class="card-body">
       <h5 class="card-title">{{ post.title }}</h5>
       <p class="card-text">
         {{ post.content }}
       </p>
     </div>
+    <!-- Footer -->
     <div
       class="
         card-footer
