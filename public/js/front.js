@@ -2062,6 +2062,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
+/* harmony import */ var _posts_PostCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../posts/PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
 //
 //
 //
@@ -2069,40 +2071,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "PostDetailsPage"
+  name: "PostDetailsPage",
+  components: {
+    PostCard: _posts_PostCard_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Loader: _Loader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      post: null,
+      isLoading: false
+    };
+  },
+  methods: {
+    getPost: function getPost() {
+      var _this = this;
+
+      this.isLoading = true;
+      axios.get("http://localhost:8000/api/posts/93").then(function (res) {
+        _this.post = res.data;
+      })["catch"](function (err) {
+        console.error(err);
+      }).then(function () {
+        _this.isLoading = false;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getPost();
+  }
 });
 
 /***/ }),
@@ -3715,56 +3714,16 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { attrs: { id: "post-details" } }, [
-    _c("div", { staticClass: "card my-3" }, [
-      _c("div", { staticClass: "card-header d-flex justify-content-between" }, [
-        _c("span", [_vm._v(_vm._s(_vm.updatedAt))]),
-        _vm._v(" "),
-        _c("em", [_vm._v(_vm._s(_vm.post.author.name))]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("h5", { staticClass: "card-title" }, [
-          _vm._v(_vm._s(_vm.post.title)),
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [
-          _vm._v("\n        " + _vm._s(_vm.post.content) + "\n      "),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "\n        card-footer\n        text-muted\n        d-flex\n        justify-content-between\n        align-items-center\n      ",
-        },
-        [
-          _c(
-            "span",
-            { class: "badge badge-pill badge-" + _vm.post.category.color },
-            [_vm._v(_vm._s(_vm.post.category.label))]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            _vm._l(_vm.post.tags, function (tag) {
-              return _c(
-                "span",
-                {
-                  key: tag.id,
-                  staticClass: "badge mr-1",
-                  style: "background-color: " + tag.color + "; color: white;",
-                },
-                [_vm._v(_vm._s(tag.label))]
-              )
-            }),
-            0
-          ),
-        ]
-      ),
-    ]),
-  ])
+  return _c(
+    "section",
+    { attrs: { id: "post-details" } },
+    [
+      _vm.isLoading && !_vm.post
+        ? _c("Loader")
+        : _c("PostCard", { attrs: { post: _vm.post } }),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3899,7 +3858,7 @@ var render = function () {
           _c(
             "router-link",
             {
-              staticClass: "btn btn-primary",
+              staticClass: "btn btn-sm btn-primary",
               attrs: {
                 to: { name: "post-details", params: { id: _vm.post.id } },
               },
