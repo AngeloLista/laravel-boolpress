@@ -6,12 +6,14 @@ Vue.use(VueRouter)
 
 // Importiamo i componenti che fungono da pagine
 import HomePage from './components/pages/HomePage.vue'
+import NotFoundPage from './components/pages/NotFoundPage.vue'
 
 // Inizializziamo il Router
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        { path: '/', component: HomePage }
+        { path: '/', component: HomePage },
+        { path: '*', component: NotFoundPage },
     ]
 })
 
