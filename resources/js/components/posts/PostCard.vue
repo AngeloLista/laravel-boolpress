@@ -11,7 +11,7 @@
         <router-link
           v-if="!hideLink"
           class="btn btn-sm btn-primary"
-          :to="{ name: 'post-details', params: { id: post.id } }"
+          :to="{ name: 'post-details', params: { slug: post.slug } }"
           >Show more</router-link
         >
         <button v-else class="btn btn-sm btn-primary" @click="$router.back()">
