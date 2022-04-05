@@ -2203,6 +2203,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post"],
@@ -3873,9 +3885,30 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card my-3" }, [
     _c("div", { staticClass: "card-header d-flex justify-content-between" }, [
-      _c("span", [_vm._v(_vm._s(_vm.updatedAt))]),
+      _c("div", [
+        _c("span", [_vm._v(_vm._s(_vm.updatedAt))]),
+        _vm._v(" "),
+        _c("em", { staticClass: "ml-3" }, [
+          _vm._v(_vm._s(_vm.post.author.name)),
+        ]),
+      ]),
       _vm._v(" "),
-      _c("em", [_vm._v(_vm._s(_vm.post.author.name))]),
+      _c(
+        "div",
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-primary",
+              attrs: {
+                to: { name: "post-details", params: { id: _vm.post.id } },
+              },
+            },
+            [_vm._v("Show more")]
+          ),
+        ],
+        1
+      ),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
@@ -20053,9 +20086,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _components_pages_HomePage_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'home'
   }, {
-    path: 'posts/{id}',
+    path: 'posts/:id',
     component: _components_pages_PostDetailsPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    name: 'Post-details'
+    name: 'post-details'
   }, {
     path: '*',
     component: _components_pages_NotFoundPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"],

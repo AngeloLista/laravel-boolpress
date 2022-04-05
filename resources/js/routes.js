@@ -16,7 +16,7 @@ const router = new VueRouter({
     linkActiveClass: 'active',
     routes: [
         { path: '/', component: HomePage, name: 'home' },
-        { path: 'posts/{id}', component: PostDetailsPage, name: 'Post-details' },
+        { path: 'posts/:id', component: PostDetailsPage, name: 'post-details' },
         { path: '*', component: NotFoundPage, name: 'not-found' },
     ]
 })
