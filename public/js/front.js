@@ -2216,6 +2216,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post", "hide-link"],
@@ -3868,7 +3871,18 @@ var render = function () {
                 },
                 [_vm._v("Show more")]
               )
-            : _vm._e(),
+            : _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-primary",
+                  on: {
+                    click: function ($event) {
+                      return _vm.$router.back()
+                    },
+                  },
+                },
+                [_vm._v("\n        Go back\n      ")]
+              ),
         ],
         1
       ),

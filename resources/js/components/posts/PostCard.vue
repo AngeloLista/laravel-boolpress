@@ -14,6 +14,9 @@
           :to="{ name: 'post-details', params: { id: post.id } }"
           >Show more</router-link
         >
+        <button v-else class="btn btn-sm btn-primary" @click="$router.back()">
+          Go back
+        </button>
       </div>
     </div>
     <!-- Body -->
