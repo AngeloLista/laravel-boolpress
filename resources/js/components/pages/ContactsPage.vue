@@ -1,5 +1,6 @@
 <template>
   <div class="container my-3">
+    <Loader v-if="isLoading" />
     <h1>Contact Us</h1>
     <section id="contact-form">
       <!-- Email -->
@@ -40,18 +41,24 @@
 </template>
 
 <script>
+import Loader from "../Loader.vue";
 export default {
   name: "ContactsPage",
+  components: {
+    Loader,
+  },
   data() {
     return {
       form: {
         email: "",
         message: "",
       },
+      isLoading: false,
     };
   },
   methods: {
     sendForm() {
+      this.isLoading = true;
       axios
         .post("http://localhost:8000/api/messages", this.form)
         .then((res) => {
@@ -59,7 +66,9 @@ export default {
           this.form.message = "";
         })
         .catch((err) => {})
-        .then(() => {});
+        .then(() => {
+          this.isLoading = false;
+        });
     },
   },
 };
