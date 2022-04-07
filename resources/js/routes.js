@@ -8,6 +8,7 @@ Vue.use(VueRouter)
 import HomePage from './components/pages/HomePage.vue'
 import PostDetailsPage from './components/pages/PostDetailsPage.vue'
 import NotFoundPage from './components/pages/NotFoundPage.vue'
+import ContactsPage from './components/pages/ContactsPage.vue'
 
 // Inizializziamo il Router
 const router = new VueRouter({
@@ -16,7 +17,8 @@ const router = new VueRouter({
     linkActiveClass: 'active',
     routes: [
         { path: '/', component: HomePage, name: 'home' },
-        { path: 'posts/:slug', component: PostDetailsPage, name: 'post-details' },
+        { path: '/posts/:slug', component: PostDetailsPage, name: 'post-details' },
+        { path: '/contacts', component: ContactsPage, name: 'contacts' },
         { path: '*', component: NotFoundPage, name: 'not-found' },
     ]
 })
