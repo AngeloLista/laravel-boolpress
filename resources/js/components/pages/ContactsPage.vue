@@ -5,10 +5,15 @@
     <section id="contact-form">
       <!-- Alert -->
       <Alert
-        v-if="alertMessage"
+        v-if="alertMessage || hasErrors"
         @on-alert-close="alertMessage = ''"
         dismissable="true"
-        >{{ alertMessage }}
+        :type="hasErrors ? 'danger' : 'success'"
+      >
+        <div v-if="alertMessage">{{ alertMessage }}</div>
+        <ul v-if="hasErrors">
+          <li v-for="(error, key) in errors" :key="key">{{ error }}</li>
+        </ul>
       </Alert>
       <!-- Email -->
       <div class="form-group">
@@ -50,6 +55,7 @@
 <script>
 import Loader from "../Loader.vue";
 import Alert from "../Alert.vue";
+import { isEmpty } from "lodash";
 
 export default {
   name: "ContactsPage",
@@ -63,6 +69,7 @@ export default {
         email: "",
         message: "",
       },
+      errors: {},
       isLoading: false,
       isError: false,
       alertMessage: "",
@@ -79,14 +86,19 @@ export default {
           this.alertMessage = "Your message has been successfully sent";
         })
         .catch((err) => {
-          // console.log(err.response.status);
-          // this.errors = {
-          //   error: "An error has occurred",
-          // };
+          console.log(err.response.status);
+          this.errors = {
+            error: "An error has occurred",
+          };
         })
         .then(() => {
           this.isLoading = false;
         });
+    },
+  },
+  computed: {
+    hasErrors() {
+      return !isEmpty(this.errors);
     },
   },
 };
