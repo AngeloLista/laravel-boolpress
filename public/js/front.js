@@ -2099,6 +2099,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2121,22 +2129,33 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    validateForm: function validateForm() {
+      var errors = {};
+      if (!this.form.email.trim()) errors.email = "The email field is required.";
+      if (!this.form.message.trim()) errors.message = "The message field is required.";
+      if (this.form.email && !this.form.email.match(/^(?![_.-])((?![_.-][_.-])[a-zA-Z\d_.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}$/)) errors.email = "The email must be a valid email address.";
+      this.errors = errors;
+    },
     sendForm: function sendForm() {
       var _this = this;
 
-      this.isLoading = true;
-      axios.post("http://localhost:8000/api/messages", this.form).then(function (res) {
-        _this.form.email = "";
-        _this.form.message = "";
-        _this.alertMessage = "Your message has been successfully sent";
-      })["catch"](function (err) {
-        console.log(err.response.status);
-        _this.errors = {
-          error: "An error has occurred"
-        };
-      }).then(function () {
-        _this.isLoading = false;
-      });
+      this.validateForm();
+
+      if (!this.hasErrors) {
+        this.isLoading = true;
+        axios.post("http://localhost:8000/api/messages", this.form).then(function (res) {
+          _this.form.email = "";
+          _this.form.message = "";
+          _this.alertMessage = "Your message has been successfully sent";
+        })["catch"](function (err) {
+          console.log(err.response.status);
+          _this.errors = {
+            error: "An error has occurred"
+          };
+        }).then(function () {
+          _this.isLoading = false;
+        });
+      }
     }
   },
   computed: {
@@ -21096,7 +21115,7 @@ var render = function () {
                   },
                   on: {
                     "on-alert-close": function ($event) {
-                      _vm.alertMessage = ""
+                      ;(_vm.alertMessage = ""), (_vm.errors = {})
                     },
                   },
                 },
@@ -21131,6 +21150,7 @@ var render = function () {
                 },
               ],
               staticClass: "form-control",
+              class: { "is-invalid": _vm.errors.email },
               attrs: {
                 type: "email",
                 id: "email",
@@ -21147,14 +21167,18 @@ var render = function () {
               },
             }),
             _vm._v(" "),
-            _c(
-              "small",
-              {
-                staticClass: "form-text text-muted",
-                attrs: { id: "emailHelp" },
-              },
-              [_vm._v("We'll never share your email with anyone else.")]
-            ),
+            _vm.errors.email
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v("\n        " + _vm._s(_vm.errors.email) + "\n      "),
+                ])
+              : _c(
+                  "small",
+                  {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "emailHelp" },
+                  },
+                  [_vm._v("We'll never share your email with anyone else.")]
+                ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
@@ -21172,6 +21196,7 @@ var render = function () {
                 },
               ],
               staticClass: "form-control",
+              class: { "is-invalid": _vm.errors.message },
               attrs: { id: "exampleFormControlTextarea1", rows: "9" },
               domProps: { value: _vm.form.message },
               on: {
@@ -21184,14 +21209,20 @@ var render = function () {
               },
             }),
             _vm._v(" "),
-            _c(
-              "small",
-              {
-                staticClass: "form-text text-muted",
-                attrs: { id: "emailHelp" },
-              },
-              [_vm._v("Type here your text message.")]
-            ),
+            _vm.errors.message
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    "\n        " + _vm._s(_vm.errors.message) + "\n      "
+                  ),
+                ])
+              : _c(
+                  "small",
+                  {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "emailHelp" },
+                  },
+                  [_vm._v("Type here your text message.")]
+                ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "d-flex justify-content-end" }, [

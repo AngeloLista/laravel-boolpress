@@ -6,7 +6,7 @@
       <!-- Alert -->
       <Alert
         v-if="alertMessage || hasErrors"
-        @on-alert-close="alertMessage = ''"
+        @on-alert-close="(alertMessage = ''), (errors = {})"
         dismissable="true"
         :type="hasErrors ? 'danger' : 'success'"
       >
@@ -22,10 +22,14 @@
           v-model="form.email"
           type="email"
           class="form-control"
+          :class="{ 'is-invalid': errors.email }"
           id="email"
           aria-describedby="emailHelp"
         />
-        <small id="emailHelp" class="form-text text-muted"
+        <div v-if="errors.email" class="invalid-feedback">
+          {{ errors.email }}
+        </div>
+        <small v-else id="emailHelp" class="form-text text-muted"
           >We'll never share your email with anyone else.</small
         >
       </div>
@@ -35,10 +39,14 @@
         <textarea
           v-model="form.message"
           class="form-control"
+          :class="{ 'is-invalid': errors.message }"
           id="exampleFormControlTextarea1"
           rows="9"
         ></textarea>
-        <small id="emailHelp" class="form-text text-muted"
+        <div v-if="errors.message" class="invalid-feedback">
+          {{ errors.message }}
+        </div>
+        <small v-else id="emailHelp" class="form-text text-muted"
           >Type here your text message.</small
         >
       </div>
@@ -76,24 +84,45 @@ export default {
     };
   },
   methods: {
+    validateForm() {
+      const errors = {};
+      if (!this.form.email.trim())
+        errors.email = "The email field is required.";
+      if (!this.form.message.trim())
+        errors.message = "The message field is required.";
+
+      if (
+        this.form.email &&
+        !this.form.email.match(
+          /^(?![_.-])((?![_.-][_.-])[a-zA-Z\d_.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}$/
+        )
+      )
+        errors.email = "The email must be a valid email address.";
+
+      this.errors = errors;
+    },
     sendForm() {
-      this.isLoading = true;
-      axios
-        .post("http://localhost:8000/api/messages", this.form)
-        .then((res) => {
-          this.form.email = "";
-          this.form.message = "";
-          this.alertMessage = "Your message has been successfully sent";
-        })
-        .catch((err) => {
-          console.log(err.response.status);
-          this.errors = {
-            error: "An error has occurred",
-          };
-        })
-        .then(() => {
-          this.isLoading = false;
-        });
+      this.validateForm();
+
+      if (!this.hasErrors) {
+        this.isLoading = true;
+        axios
+          .post("http://localhost:8000/api/messages", this.form)
+          .then((res) => {
+            this.form.email = "";
+            this.form.message = "";
+            this.alertMessage = "Your message has been successfully sent";
+          })
+          .catch((err) => {
+            console.log(err.response.status);
+            this.errors = {
+              error: "An error has occurred",
+            };
+          })
+          .then(() => {
+            this.isLoading = false;
+          });
+      }
     },
   },
   computed: {
