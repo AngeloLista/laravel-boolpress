@@ -3,6 +3,13 @@
     <Loader v-if="isLoading" />
     <h1>Contact Us</h1>
     <section id="contact-form">
+      <!-- Alert -->
+      <Alert
+        v-if="alertMessage"
+        @on-alert-close="alertMessage = ''"
+        dismissable="true"
+        >{{ alertMessage }}
+      </Alert>
       <!-- Email -->
       <div class="form-group">
         <label for="email">Email address</label>
@@ -42,10 +49,13 @@
 
 <script>
 import Loader from "../Loader.vue";
+import Alert from "../Alert.vue";
+
 export default {
   name: "ContactsPage",
   components: {
     Loader,
+    Alert,
   },
   data() {
     return {
@@ -54,6 +64,8 @@ export default {
         message: "",
       },
       isLoading: false,
+      isError: false,
+      alertMessage: "",
     };
   },
   methods: {
@@ -64,8 +76,14 @@ export default {
         .then((res) => {
           this.form.email = "";
           this.form.message = "";
+          this.alertMessage = "Your message has been successfully sent";
         })
-        .catch((err) => {})
+        .catch((err) => {
+          // console.log(err.response.status);
+          // this.errors = {
+          //   error: "An error has occurred",
+          // };
+        })
         .then(() => {
           this.isLoading = false;
         });
